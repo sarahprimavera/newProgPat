@@ -18,6 +18,13 @@ import java.sql.Statement;
 public class ViewClass {
     public static Connection con;
     
+     public void viewOptionsStudent(StudentClass student){
+        student.displayOptions();
+    }
+    public void viewOptionsLibrarian(LibrarianClass librarian){
+        librarian.displayOptions();
+    }
+    
     //prints out data for book table
     public void bookTable() throws SQLException{
         String book = "SELECT * FROM Books";
