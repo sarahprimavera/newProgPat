@@ -10,7 +10,7 @@ package finalproject_kallasprimavera;
  * @author kalla
  */
 public class UserFactory {
-    public User getUser(String userType){
+    public static User getUser(String userType){
         if(userType.equalsIgnoreCase("Librarian")){
             return new LibrarianClass();
         } else if(userType.equalsIgnoreCase("Student")){

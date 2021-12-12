@@ -65,10 +65,10 @@ public class FinalProject_KallasPrimavera {
                 System.out.println("Sorry, that was not a correct entry.");
             }
         }
-        //im messing aroundddd
+        
         // Initialize variables for role input
         String userType;
-        boolean isUserCorrect = true;
+        //boolean isUserCorrect = true;
         UserFactory userFactory = new UserFactory();
         
         // Ask for user role and ensure the input is valid
@@ -77,14 +77,17 @@ public class FinalProject_KallasPrimavera {
             userType = userInput.nextLine();
             
             userFactory.getUser(userType);
-            if(userType.equalsIgnoreCase("Librarian")){
+            /*if(userType.equalsIgnoreCase("Librarian")){
                 isUserCorrect = true;
             } else if(userType.equalsIgnoreCase("Student")){
                 isUserCorrect = true;
             } else{
                 isUserCorrect = false;
-            }
-        } while(isUserCorrect == false);
+            }*/
+        } while(UserFactory.getUser(userType) == null); //isUserCorrect == false
+        
+        UserFactory.getUser(userType);
+        
     }
 }
     
