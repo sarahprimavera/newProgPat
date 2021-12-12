@@ -90,13 +90,45 @@ public class ControllerClass {
         }
     }
     
-    public void studentControl(){
+    public void studentControl() throws SQLException{
         StudentClass student = new StudentClass();
         view.viewOptionsStudent(student);
         
-        //if user chooses wtv call model method
+        int option = numberInput.nextInt();//whatever student enters as option will be read here
         
-    }
-    
-    
+        //if user chooses wtv call model method
+        switch(option){
+            case 1: // search book by title
+                System.out.println("Please enter the title of the book you are looking for: ");
+                String title = userInput.nextLine();
+                model.searchBookByTitle(title);
+                break;
+            case 2: // search book by author
+                System.out.println("Please enter the name of the author you are looking for: ");
+                String author = userInput.nextLine();
+                model.searchBookByAuthor(author);
+                break;
+            case 3: // view entire catalogue
+                model.viewBookCatalogue();
+                break;
+            case 4: // borrow a book
+                System.out.println("Please enter id of this process: ");
+                int id = numberInput.nextInt();
+                System.out.println("Please enter sn of the book: ");
+                String studentsn = userInput.nextLine();
+                System.out.println("Please enter your student id: ");
+                int studentId = numberInput.nextInt();
+                System.out.println("Please enter today's date (YYYY): ");
+                String issueDate = userInput.nextLine();
+                model.issueBook(id, studentsn, studentId, issueDate);
+                break;
+            case 5: // return a book
+                System.out.println("Please enter today's date (YYYY): ");
+                String returnDate = userInput.nextLine();
+                System.out.println("Please enter the book's serial number: ");
+                String returnsn = userInput.nextLine();
+                model.returnBook(returnDate, returnsn);
+                break;
+        }
+    }    
 }
