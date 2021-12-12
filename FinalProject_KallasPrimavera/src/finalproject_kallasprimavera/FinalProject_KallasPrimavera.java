@@ -26,22 +26,15 @@ public class FinalProject_KallasPrimavera {
 
     /**
      * @param args the command line arguments
-     
-    WHAT IS NEEDED AND WHERE ITS DONE
-    MVC:
-        model class -- Should be 2 (one arrayList of books and one of students to add stuff to database)
-        view class 
-        control class
-    design pattern:
-        factory -- WILL BE DONE in UserFactory - interface user - options Student class and Librarian class
-            librarian user -> along with their methods
-            student user -> along with their methods
-        singleton -- DONE in GetConnection Class
-            to make sure there's only one connection to the database
-
     */
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        // create a model, ontroller and a view
+        ModelClass model = new ModelClass();
+        ViewClass view = new ViewClass();
+        ControllerClass controller = new ControllerClass(model, view);
+        
+        
         // Create a Scanner for future input.
         Scanner userInput = new Scanner(System.in);
 
@@ -63,6 +56,15 @@ public class FinalProject_KallasPrimavera {
             }
         }
         
+        // ask for userType
+        String user = controller.getUserType();
+        
+        // displayoptions + do action
+        if(user.equalsIgnoreCase("librarian")){
+            controller.librarianControl();
+        } else {
+            controller.studentControl();
+        }
     }
 }
     

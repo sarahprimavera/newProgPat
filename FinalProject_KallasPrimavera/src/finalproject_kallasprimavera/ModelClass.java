@@ -24,6 +24,10 @@ public class ModelClass {
     private int quantity;
     private String addedDate;
 
+    public ModelClass(){
+        
+    }
+    
     public ModelClass(String sn, String title, String author, String publisher, int quantity, String addedDate) {
         this.sn = sn;
         this.title = title;

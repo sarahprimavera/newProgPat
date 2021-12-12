@@ -17,6 +17,8 @@ public class ControllerClass {
     // add the user model and view classes to our controller class
     private ModelClass model;
     private ViewClass view;
+    
+    
     Scanner userInput = new Scanner(System.in);//scanner to read strings
     Scanner numberInput = new Scanner(System.in);//scanner to read ints
     
@@ -25,6 +27,7 @@ public class ControllerClass {
         this.model = model;
         this.view = view;
     }
+    
     /* block of code to see if user is librarian or student*/
     public String getUserType(){
         
