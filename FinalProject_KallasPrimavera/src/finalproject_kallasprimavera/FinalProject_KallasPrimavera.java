@@ -66,28 +66,6 @@ public class FinalProject_KallasPrimavera {
             }
         }
         
-        // Initialize variables for role input
-        String userType;
-        //boolean isUserCorrect = true;
-        UserFactory userFactory = new UserFactory();
-        
-        // Ask for user role and ensure the input is valid
-        do{
-            System.out.println("What type of user are you? Librarian or Student: ");
-            userType = userInput.nextLine();
-            
-            userFactory.getUser(userType);
-            /*if(userType.equalsIgnoreCase("Librarian")){
-                isUserCorrect = true;
-            } else if(userType.equalsIgnoreCase("Student")){
-                isUserCorrect = true;
-            } else{
-                isUserCorrect = false;
-            }*/
-        } while(UserFactory.getUser(userType) == null); //isUserCorrect == false
-        
-        UserFactory.getUser(userType);
-        
     }
 }
     
