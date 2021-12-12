@@ -13,7 +13,6 @@ import java.sql.Connection;
  * @author kalla
  */
 public class Book {
-    // i hate progpats mvc and git
     // Create necessary variables that are datamembers in the books table
     private String serialNumber;
     private String title;
