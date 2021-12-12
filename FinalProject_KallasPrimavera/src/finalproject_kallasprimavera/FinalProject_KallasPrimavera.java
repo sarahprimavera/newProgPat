@@ -65,6 +65,9 @@ public class FinalProject_KallasPrimavera {
         } else {
             controller.studentControl();
         }
+        // for above, i added a exit option, i wanna do something like while X case isnt selected keep doing the control 
+        // that way when they exit they can exit
+        
     }
 }
     

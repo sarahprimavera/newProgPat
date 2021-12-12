@@ -18,6 +18,7 @@ public class LibrarianClass implements User{
         str += "\n" + "\t" + "Enter 2 to issue a book,";
         str += "\n" + "\t" + "Enter 3 to return a book,";
         str += "\n" + "\t" + "Enter 4 to view the list of issued books.";
+        str += "\n" + "\t" + "Enter 5 to exit.";
         System.out.println(str);
     }
 }

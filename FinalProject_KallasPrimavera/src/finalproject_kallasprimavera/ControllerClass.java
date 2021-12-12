@@ -90,6 +90,9 @@ public class ControllerClass {
             case 4:
                 view.issueBooksTable();
                 break;
+            case 5:
+                System.out.println("Thank you for using the Library Management System, you may close the program now.");
+                break;
         }
     }
     
@@ -131,6 +134,9 @@ public class ControllerClass {
                 System.out.println("Please enter the book's serial number: ");
                 String returnsn = userInput.nextLine();
                 model.returnBook(returnDate, returnsn);
+                break;
+            case 6:
+                System.out.println("Thank you for using the Library Management System, you may close the program now.");
                 break;
         }
     }    

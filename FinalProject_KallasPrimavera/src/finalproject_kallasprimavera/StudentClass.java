@@ -19,6 +19,7 @@ public class StudentClass implements User{
         str += "\n" + "\t" + "Enter 3 to view the book catalogue,";
         str += "\n" + "\t" + "Enter 4 to borrow a book,";
         str += "\n" + "\t" + "Enter 5 to return a book.";
+        str += "\n" + "\t" + "Enter 6 to exit.";
         System.out.println(str);
     }
 }
