@@ -16,8 +16,74 @@ import java.lang.Exception;
 public class ModelClass {
     
     public static Connection con;
+    
+    private String sn;
+    private String title;
+    private String author;
+    private String publisher;
+    private int quantity;
+    private String addedDate;
+
+    public ModelClass(String sn, String title, String author, String publisher, int quantity, String addedDate) {
+        this.sn = sn;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.quantity = quantity;
+        this.addedDate = addedDate;
+    }
+    
+    public String getsn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(String addedDate) {
+        this.addedDate = addedDate;
+    }
+    
+    
     //stuff librarians needs to do
-    public void addBook(String sn,String title,String author,String publisher,int quality,String addedDate){
+    public void addBook(String sn,String title,String author,String publisher,int quantity,String addedDate){
         try{
             String insertBook = "INSERT INTO Books VALUES (?,?,?,?,?,?)";
             PreparedStatement preparedStmt = con.prepareStatement(insertBook);
@@ -25,7 +91,7 @@ public class ModelClass {
             preparedStmt.setString (2, title);
             preparedStmt.setString (3, author);
             preparedStmt.setString (4, publisher);
-            preparedStmt.setString (5, String.valueOf(quality));
+            preparedStmt.setString (5, String.valueOf(quantity));
             preparedStmt.setString (6, addedDate);
             preparedStmt.execute();
         } catch(Exception e){
