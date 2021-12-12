@@ -18,9 +18,6 @@ import java.util.concurrent.TimeUnit;
  
 import javax.swing.*;
 import java.util.Scanner;
-
-
-
 /**
  *
  * @author kalla
