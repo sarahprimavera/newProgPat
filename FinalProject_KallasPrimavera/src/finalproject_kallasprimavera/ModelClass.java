@@ -144,15 +144,37 @@ public class ModelClass {
         //inserts title parameter in the statement and eecutes it
         PreparedStatement preparedStmt = con.prepareStatement(getBookByTitle);
         preparedStmt.setString (1, title);
-        preparedStmt.execute();
+        //preparedStmt.execute();
+        ResultSet rs = preparedStmt.executeQuery();
+        
+        while(rs.next()){
+            String sn = rs.getString("SN");
+            String title2 = rs.getString("Title");
+            String author = rs.getString("Author");
+            String publisher = rs.getString("Publisher");
+            int quantity = rs.getInt("Quantity");
+            String addedDate = rs.getString("AddedDate");
+            System.out.println(sn +" | "+title2+" | "+author+" | "+publisher+" | "+quantity+" | "+addedDate);
+        }
     }
     public void searchBookByAuthor(String author) throws SQLException{
         String searchBookByAuthor = "SELECT * FROM Books WHERE Author = (?)";
         
-        //inserts author parameter in the statement and eecutes it
+        //inserts author parameter in the statement and executes it
         PreparedStatement preparedStmt = con.prepareStatement(searchBookByAuthor);
         preparedStmt.setString (1, author);
-        preparedStmt.execute();
+        //preparedStmt.execute();
+        ResultSet rs = preparedStmt.executeQuery();
+        
+        while(rs.next()){
+            String sn = rs.getString("SN");
+            String title = rs.getString("Title");
+            String author2 = rs.getString("Author");
+            String publisher = rs.getString("Publisher");
+            int quantity = rs.getInt("Quantity");
+            String addedDate = rs.getString("AddedDate");
+            System.out.println(sn +" | "+title+" | "+author2+" | "+publisher+" | "+quantity+" | "+addedDate);
+        }
     }
     public void viewBookCatalogue() throws SQLException{
         String viewBookCat = "SELECT * FROM Books";
