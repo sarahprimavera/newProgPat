@@ -5,6 +5,7 @@
  */
 package finalproject_kallasprimavera;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -41,15 +42,52 @@ public class ControllerClass {
         
         return userType; //returns what the user finally enters correct user
     }
-    
-    public void librarianControl(){
+    //what the librarian will be able to do
+    public void librarianControl() throws SQLException{
         LibrarianClass librarian = new LibrarianClass();
         view.viewOptionsLibrarian(librarian);
         
-        int option = numberInput.nextInt();
+        int option = numberInput.nextInt();//whatever librarian enters as option will be read here
         
-        //if option is 1-> ask librarin for sn,title,author,publisher,addedDate  
-        //model.addBook(wtv librarian inputs goes as parameter)
+        //depending on what librarian chooses, different methods from model will be executed
+        switch(option){
+            case 1:
+                System.out.println("Please enter SN of book");
+                String sn = userInput.nextLine();
+                System.out.println("Please enter title of book");
+                String title = userInput.nextLine();
+                System.out.println("Please enter author of book");
+                String author = userInput.nextLine();
+                System.out.println("Please enter publisher of book");
+                String publisher = userInput.nextLine();
+                System.out.println("Please enter quantity of "+title);
+                int quantity = numberInput.nextInt();
+                System.out.println("Please enter today's date (YYYY)");
+                String date = userInput.nextLine();
+                model.addBook(sn, title, author, publisher, quantity, date);
+                break;
+            case 2:
+                System.out.println("Please enter id of this process");
+                int id = numberInput.nextInt();
+                System.out.println("Please enter sn of the book");
+                String sn2 = userInput.nextLine();
+                System.out.println("Please enter student id of student");
+                int studentId = numberInput.nextInt();
+                System.out.println("Please enter today's date (YYYY)");
+                String issueDate = userInput.nextLine();
+                model.issueBook(id, sn2, studentId, issueDate);
+                break;
+            case 3:
+                System.out.println("Enter today's date");
+                String todayDate = userInput.nextLine();
+                System.out.println("Enter the sn of the book you are returning");
+                String sn3 = userInput.nextLine();
+                model.returnBook(todayDate, sn3);
+                break;
+            case 4:
+                view.issueBooksTable();
+                break;
+        }
     }
     
     public void studentControl(){

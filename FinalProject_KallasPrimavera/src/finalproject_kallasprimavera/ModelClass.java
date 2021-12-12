@@ -99,7 +99,7 @@ public class ModelClass {
         }
         
     }
-    public void issueBook(int id,String sn, int studentId,String issueDate,String returnDate){
+    public void issueBook(int id,String sn, int studentId,String issueDate){
             try{
             String insertIssuedBooks = "INSERT INTO IssuedBooks VALUES (?,?,?,?,?)";
             PreparedStatement preparedStmt = con.prepareStatement(insertIssuedBooks);
@@ -107,7 +107,7 @@ public class ModelClass {
             preparedStmt.setString (2, sn);
             preparedStmt.setString (3, String.valueOf(studentId));
             preparedStmt.setString (4, issueDate);
-            preparedStmt.setString (5, returnDate);
+            preparedStmt.setString (5, null);//is null because 
             preparedStmt.execute();
             
             //String removeQuantity = "UPDATE Books SET Quantity = -1 WHERE Books.SN = "; 
@@ -116,6 +116,7 @@ public class ModelClass {
             System.out.println("Couldn't add to issues books table, something went wrong");
         }
     }
+    //don't need this because already displaying issuedbooks table in view class
     public void viewIssueBookWithStudent() throws SQLException{
         String viewIssueBooks = "SELECT * FROM IssuedBooks";
         
@@ -127,7 +128,6 @@ public class ModelClass {
         String studentId;
         String issueDate;
         String returnDate;
-        //getting all the info from the table, will use this later to print it out to the user
         while (result.next()){
             id = result.getString("ID");
             sn = result.getString("SN");
