@@ -14,10 +14,10 @@ public class LibrarianClass implements User{
     public void displayOptions(){
         String str = "";
         str += "\n" + "Please select one of the following options: ";
-        str += "\n" + "\t" + "addBook";
-        str += "\n" + "\t" + "issueBook";
-        str += "\n" + "\t" + "returnBook";
-        str += "\n" + "\t" + "viewIssuedBook";
+        str += "\n" + "\t" + "Enter 1 to add a book to the inventory,";
+        str += "\n" + "\t" + "Enter 2 to issue a book,";
+        str += "\n" + "\t" + "Enter 3 to return a book,";
+        str += "\n" + "\t" + "Enter 4 to view the list of issued books.";
         System.out.println(str);
     }
 }

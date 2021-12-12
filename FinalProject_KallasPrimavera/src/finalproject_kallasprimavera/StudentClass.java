@@ -14,11 +14,11 @@ public class StudentClass implements User{
     public void displayOptions(){
         String str = "";
         str += "\n" + "Please select one of the following options: ";
-        str += "\n" + "\t" + "searchBookByTitle";
-        str += "\n" + "\t" + "searchBookByAuthor";
-        str += "\n" + "\t" + "viewCatalogue";
-        str += "\n" + "\t" + "borrowBook";
-        str += "\n" + "\t" + "returnBook";
+        str += "\n" + "\t" + "Enter 1 to search a book title by it's title,";
+        str += "\n" + "\t" + "Enter 2 to search a book title by it's author,";
+        str += "\n" + "\t" + "Enter 3 to view the book catalogue,";
+        str += "\n" + "\t" + "Enter 4 to borrow a book,";
+        str += "\n" + "\t" + "Enter 5 to return a book.";
         System.out.println(str);
     }
 }
