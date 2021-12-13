@@ -16,6 +16,7 @@ import java.lang.Exception;
 public class ModelClass {
     
     public static Connection con;
+    GetConnection connectDb = new GetConnection();
     
     private String sn;
     private String title;
@@ -89,6 +90,7 @@ public class ModelClass {
     //stuff librarians needs to do
     public void addBook(String sn,String title,String author,String publisher,int quantity,String addedDate){
         try{
+            con = connectDb.getSingleInstance();
             String insertBook = "INSERT INTO Books VALUES (?,?,?,?,?,?)";
             PreparedStatement preparedStmt = con.prepareStatement(insertBook);
             preparedStmt.setString (1, sn);
@@ -99,131 +101,163 @@ public class ModelClass {
             preparedStmt.setString (6, addedDate);
             preparedStmt.execute();
         } catch(Exception e){
-            System.out.println("Couldn't add book, something went wrong");
+            System.out.println("Couldn't add book, something went wrong " + e);
         }
         
     }
     public void issueBook(int id,String sn, int studentId,String issueDate){
             try{
-            String insertIssuedBooks = "INSERT INTO IssuedBooks VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStmt = con.prepareStatement(insertIssuedBooks);
-            preparedStmt.setString (1, String.valueOf(id));
-            preparedStmt.setString (2, sn);
-            preparedStmt.setString (3, String.valueOf(studentId));
-            preparedStmt.setString (4, issueDate);
-            preparedStmt.setString (5, null);//is null because 
-            preparedStmt.execute();
+                con = connectDb.getSingleInstance();
+                String insertIssuedBooks = "INSERT INTO IssuedBooks VALUES (?,?,?,?,?)";
+                PreparedStatement preparedStmt = con.prepareStatement(insertIssuedBooks);
+                preparedStmt.setString (1, String.valueOf(id));
+                preparedStmt.setString (2, sn);
+                preparedStmt.setString (3, String.valueOf(studentId));
+                preparedStmt.setString (4, issueDate);
+                preparedStmt.setString (5, null);//is null because 
+                preparedStmt.execute();
             
             //String removeQuantity = "UPDATE Books SET Quantity = -1 WHERE Books.SN = "; 
             //try to remove quantity of book by 1 since a book gets issues
         } catch(Exception e){
-            System.out.println("Couldn't add to issues books table, something went wrong");
+            System.out.println("Couldn't add to issues books table, something went wrong "+e);
         }
     }
     //don't need this because already displaying issuedbooks table in view class
-    public void viewIssueBookWithStudent() throws SQLException{
-        String viewIssueBooks = "SELECT * FROM IssuedBooks";
-        
-        Statement stat = con.createStatement();
-        ResultSet  result = stat.executeQuery(viewIssueBooks);
-        
-        String id;
-        String sn;
-        String studentId;
-        String issueDate;
-        String returnDate;
-        while (result.next()){
-            id = result.getString("ID");
-            sn = result.getString("SN");
-            studentId = result.getString("StudentId");
-            issueDate = result.getString("IssueDate");
-            returnDate = result.getString("ReturnDate");
+    public void viewIssueBookWithStudent(){
+        try{
+            con = connectDb.getSingleInstance();
+            String viewIssueBooks = "SELECT * FROM IssuedBooks";
+
+            Statement stat = con.createStatement();
+            ResultSet  result = stat.executeQuery(viewIssueBooks);
+
+            String id;
+            String sn;
+            String studentId;
+            String issueDate;
+            String returnDate;
+            while (result.next()){
+                id = result.getString("ID");
+                sn = result.getString("SN");
+                studentId = result.getString("StudentId");
+                issueDate = result.getString("IssueDate");
+                returnDate = result.getString("ReturnDate");
+        }
+        }catch (Exception e){
+            System.out.println("Cannot view issued books table "+e);
         }
     }
     
     //stuff sutdents need to do
-    public void searchBookByTitle(String title) throws SQLException{
-        String getBookByTitle = "SELECT * FROM Books WHERE Title = (?)";
-        
-        //inserts title parameter in the statement and eecutes it
-        PreparedStatement preparedStmt = con.prepareStatement(getBookByTitle);
-        preparedStmt.setString (1, title);
-        //preparedStmt.execute();
-        ResultSet rs = preparedStmt.executeQuery();
-        
-        while(rs.next()){
-            String sn = rs.getString("SN");
-            String title2 = rs.getString("Title");
-            String author = rs.getString("Author");
-            String publisher = rs.getString("Publisher");
-            int quantity = rs.getInt("Quantity");
-            String addedDate = rs.getString("AddedDate");
-            System.out.println(sn +" | "+title2+" | "+author+" | "+publisher+" | "+quantity+" | "+addedDate);
+    public void searchBookByTitle(String title){
+        try{
+            con = connectDb.getSingleInstance();
+            String getBookByTitle = "SELECT * FROM Books WHERE Title = (?)";
+
+            //inserts title parameter in the statement and eecutes it
+            PreparedStatement preparedStmt = con.prepareStatement(getBookByTitle);
+            preparedStmt.setString (1, title);
+            //preparedStmt.execute();
+            ResultSet rs = preparedStmt.executeQuery();
+
+            while(rs.next()){
+                String sn = rs.getString("SN");
+                String title2 = rs.getString("Title");
+                String author = rs.getString("Author");
+                String publisher = rs.getString("Publisher");
+                int quantity = rs.getInt("Quantity");
+                String addedDate = rs.getString("AddedDate");
+                System.out.println(sn +" | "+title2+" | "+author+" | "+publisher+" | "+quantity+" | "+addedDate);
+        }}
+        catch (Exception e){
+            System.out.println("Couldn't search book by title "+e);
         }
     }
-    public void searchBookByAuthor(String author) throws SQLException{
-        String searchBookByAuthor = "SELECT * FROM Books WHERE Author = (?)";
-        
-        //inserts author parameter in the statement and executes it
-        PreparedStatement preparedStmt = con.prepareStatement(searchBookByAuthor);
-        preparedStmt.setString (1, author);
-        //preparedStmt.execute();
-        ResultSet rs = preparedStmt.executeQuery();
-        
-        while(rs.next()){
-            String sn = rs.getString("SN");
-            String title = rs.getString("Title");
-            String author2 = rs.getString("Author");
-            String publisher = rs.getString("Publisher");
-            int quantity = rs.getInt("Quantity");
-            String addedDate = rs.getString("AddedDate");
-            System.out.println(sn +" | "+title+" | "+author2+" | "+publisher+" | "+quantity+" | "+addedDate);
+    public void searchBookByAuthor(String author){
+        try{
+            con = connectDb.getSingleInstance();
+            String searchBookByAuthor = "SELECT * FROM Books WHERE Author = (?)";
+
+            //inserts author parameter in the statement and executes it
+            PreparedStatement preparedStmt = con.prepareStatement(searchBookByAuthor);
+            preparedStmt.setString (1, author);
+            //preparedStmt.execute();
+            ResultSet rs = preparedStmt.executeQuery();
+
+            while(rs.next()){
+                String sn = rs.getString("SN");
+                String title = rs.getString("Title");
+                String author2 = rs.getString("Author");
+                String publisher = rs.getString("Publisher");
+                int quantity = rs.getInt("Quantity");
+                String addedDate = rs.getString("AddedDate");
+                System.out.println(sn +" | "+title+" | "+author2+" | "+publisher+" | "+quantity+" | "+addedDate);
+        }}
+        catch (Exception e){
+            System.out.println("Couldn't search book by author "+e);
         }
     }
-    public void viewBookCatalogue() throws SQLException{
-        String viewBookCat = "SELECT * FROM Books";
-        
-        Statement stat = con.createStatement();
-        ResultSet  result = stat.executeQuery(viewBookCat);
-        
-        String sn;
-        String title;
-        String author;
-        String publisher;
-        String quantity;
-        String addedDate;
-        //getting all the info from the table that will later be returned to user
-        while (result.next()){
-            sn = result.getString("SN");
-            title = result.getString("Title");
-            author = result.getString("Author");
-            publisher = result.getString("Publisher");
-            quantity = result.getString("Quantity");
-            addedDate = result.getString("addedDate");
+    public void viewBookCatalogue(){
+        try{
+            con = connectDb.getSingleInstance();
+            String viewBookCat = "SELECT * FROM Books";
+
+            Statement stat = con.createStatement();
+            ResultSet  result = stat.executeQuery(viewBookCat);
+
+            String sn;
+            String title;
+            String author;
+            String publisher;
+            String quantity;
+            String addedDate;
+            //getting all the info from the table that will later be returned to user
+            while (result.next()){
+                sn = result.getString("SN");
+                title = result.getString("Title");
+                author = result.getString("Author");
+                publisher = result.getString("Publisher");
+                quantity = result.getString("Quantity");
+                addedDate = result.getString("addedDate");
+        }}
+        catch(Exception e){
+            System.out.println("cannot view book catalogue "+e);
         }
     }
-    public void borrowBook(int id,String sn,int studentId,String issueDate) throws SQLException{
-        String addToIssueBook = "INSERT INTO IssuedBooks VALUES (?,?,?,?,?)";
-        
-        //adds in issued books info about the book being borrowed
-        //since book is just getting borrowed, return date is null
-        PreparedStatement preparedStmt = con.prepareStatement(addToIssueBook);
-        preparedStmt.setString (1, String.valueOf(id));
-        preparedStmt.setString (2, sn);
-        preparedStmt.setString (3, String.valueOf(studentId));
-        preparedStmt.setString (4, issueDate);
-        preparedStmt.setString (5, null);
-        preparedStmt.execute();
-    }
+    public void borrowBook(int id,String sn,int studentId,String issueDate){
+        try{
+            con = connectDb.getSingleInstance();
+            String addToIssueBook = "INSERT INTO IssuedBooks VALUES (?,?,?,?,?)";
+
+            //adds in issued books info about the book being borrowed
+            //since book is just getting borrowed, return date is null
+            PreparedStatement preparedStmt = con.prepareStatement(addToIssueBook);
+            preparedStmt.setString (1, String.valueOf(id));
+            preparedStmt.setString (2, sn);
+            preparedStmt.setString (3, String.valueOf(studentId));
+            preparedStmt.setString (4, issueDate);
+            preparedStmt.setString (5, null);
+            preparedStmt.execute();
+        }catch(Exception e){
+            System.out.println("Something went wrong, cannot borrow book "+e);
+        }
+    }     
+    
     
     //stuff librarian and student need to do
-    public void returnBook(String todayDate, String bookSN) throws SQLException{
-        String removeFromIssuedBook = "UPDATE from IssueBooks SET ReturnDate = (?) WHERE SN = (?)";
-        
-        // adds a return date to the issuedbook thorugh the books sn
-        PreparedStatement preparedStmt = con.prepareStatement(removeFromIssuedBook);
-        preparedStmt.setString (1, todayDate);
-        preparedStmt.setString (2, bookSN);
-        preparedStmt.execute();
+    public void returnBook(String todayDate, String bookSN){
+        try{
+            con = connectDb.getSingleInstance();
+            String removeFromIssuedBook = "UPDATE from IssueBooks SET ReturnDate = (?) WHERE SN = (?)";
+
+            // adds a return date to the issuedbook thorugh the books sn
+            PreparedStatement preparedStmt = con.prepareStatement(removeFromIssuedBook);
+            preparedStmt.setString (1, todayDate);
+            preparedStmt.setString (2, bookSN);
+            preparedStmt.execute();
+        }catch(Exception e){
+            System.out.println("Cannot return book, something went wrong "+e);
+        }
     }
 }

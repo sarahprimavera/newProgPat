@@ -55,7 +55,8 @@ public class FinalProject_KallasPrimavera {
                 System.out.println("Sorry, that was not a correct entry.");
             }
         }
-        
+        //GetConnection connectDb = new GetConnection();
+       
         // ask for userType
         String user = controller.getUserType();
         

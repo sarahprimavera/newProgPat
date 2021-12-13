@@ -15,8 +15,12 @@ import java.sql.DriverManager;
 public class GetConnection {
     public static Connection con;
     
+    //construtor that when object is created, getSingleInstance is called
+    public GetConnection(){
+        //getSingleInstance();
+    }
     // Create single instance for Singleton Design Pattern 
-    public static Connection getSingleInstance(Exception ex){
+    public Connection getSingleInstance(/*Exception ex*/){
         if(con == null){
             connect();
         } 
@@ -26,9 +30,9 @@ public class GetConnection {
     public static Connection connect()
     {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // give it a name 
-            con = DriverManager.getConnection("jdbc:sqlite:/C:\\Users\\kalla\\Desktop\\Prog Patterns\\Assignments\\Final Project\\FinalProject_Database.db");
-            //con = DriverManager.getConnection("jdbc:sqlite:/C:\\Users\\sarah\\OneDrive\\Documents\\GitHub\\Programming-Patterns\\FinalProject_Database.db"); sarah's url
+            //Class.forName("com.mysql.cj.jdbc.Driver"); // give it a name 
+            //con = DriverManager.getConnection("jdbc:sqlite:/C:\\Users\\kalla\\Desktop\\Prog Patterns\\Assignments\\Final Project\\FinalProject_Database.db");
+            con = DriverManager.getConnection("jdbc:sqlite:/C:\\Users\\sarah\\OneDrive\\Documents\\GitHub\\newProgPat\\FinalProject_Database.db"); //sarah's url
             return con;
         } 
         catch (Exception e) { // Check if it is actually connecting
