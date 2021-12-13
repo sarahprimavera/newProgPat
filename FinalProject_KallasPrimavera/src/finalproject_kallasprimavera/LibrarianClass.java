@@ -5,20 +5,30 @@
  */
 package finalproject_kallasprimavera;
 
+import java.util.ResourceBundle;
+
 /**
  *
  * @author kalla
  */
 public class LibrarianClass implements User{
+    ResourceBundle r;//resource bundle
+    String internationalization;//string that will hold which key needs to be fetched
+    
+    
     @Override
     public void displayOptions(){
-        String str = "";
-        str += "\n" + "Please select one of the following options: ";
-        str += "\n" + "\t" + "Enter 1 to add a book to the inventory,";
-        str += "\n" + "\t" + "Enter 2 to issue a book,";
-        str += "\n" + "\t" + "Enter 3 to return a book,";
-        str += "\n" + "\t" + "Enter 4 to view the list of issued books.";
-        str += "\n" + "\t" + "Enter 5 to exit.";
-        System.out.println(str);
+        internationalization = r.getString("librarianDisplay1");
+        System.out.println(internationalization);
+        internationalization = r.getString("librarianDisplay2");
+        System.out.println(internationalization);
+        internationalization = r.getString("librarianDisplay3");
+        System.out.println(internationalization);
+        internationalization = r.getString("librarianDisplay4");
+        System.out.println(internationalization);
+        internationalization = r.getString("librarianDisplay5");
+        System.out.println(internationalization);
+        internationalization = r.getString("librarianDisplay6");
+        System.out.println(internationalization);
     }
 }

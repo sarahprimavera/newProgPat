@@ -7,6 +7,7 @@ package finalproject_kallasprimavera;
 
 import java.sql.*;
 import java.lang.Exception;
+import java.util.ResourceBundle;
 /**
  *
  * @author sarah
@@ -17,6 +18,9 @@ public class ModelClass {
     
     public static Connection con;
     GetConnection connectDb = new GetConnection();
+    
+    ResourceBundle r;//resource bundle
+    String internationalization;//string that will hold which key needs to be fetched
     
     private String sn;
     private String title;
@@ -120,7 +124,8 @@ public class ModelClass {
             //String removeQuantity = "UPDATE Books SET Quantity = -1 WHERE Books.SN = "; 
             //try to remove quantity of book by 1 since a book gets issues
         } catch(Exception e){
-            System.out.println("Couldn't add to issues books table, something went wrong "+e);
+            internationalization = r.getString("addIssuedBookError");
+            System.out.println(internationalization + e);
         }
     }
     //don't need this because already displaying issuedbooks table in view class
@@ -145,7 +150,8 @@ public class ModelClass {
                 returnDate = result.getString("ReturnDate");
         }
         }catch (Exception e){
-            System.out.println("Cannot view issued books table "+e);
+            internationalization = r.getString("viewIssuedBookError");
+            System.out.println(internationalization + e);
         }
     }
     
@@ -171,7 +177,8 @@ public class ModelClass {
                 System.out.println(sn +" | "+title2+" | "+author+" | "+publisher+" | "+quantity+" | "+addedDate);
         }}
         catch (Exception e){
-            System.out.println("Couldn't search book by title "+e);
+            internationalization = r.getString("searhByTitleError");
+            System.out.println(internationalization + e);
         }
     }
     public void searchBookByAuthor(String author){
@@ -195,7 +202,8 @@ public class ModelClass {
                 System.out.println(sn +" | "+title+" | "+author2+" | "+publisher+" | "+quantity+" | "+addedDate);
         }}
         catch (Exception e){
-            System.out.println("Couldn't search book by author "+e);
+            internationalization = r.getString("searhByAuthorError");
+            System.out.println(internationalization + e);
         }
     }
     public void viewBookCatalogue(){
@@ -222,7 +230,8 @@ public class ModelClass {
                 addedDate = result.getString("addedDate");
         }}
         catch(Exception e){
-            System.out.println("cannot view book catalogue "+e);
+            internationalization = r.getString("viewCatalogueError");
+            System.out.println(internationalization + e);
         }
     }
     public void borrowBook(int id,String sn,int studentId,String issueDate){
@@ -240,7 +249,8 @@ public class ModelClass {
             preparedStmt.setString (5, null);
             preparedStmt.execute();
         }catch(Exception e){
-            System.out.println("Something went wrong, cannot borrow book "+e);
+            internationalization = r.getString("borrowBookError");
+            System.out.println(internationalization + e);
         }
     }     
     
@@ -257,7 +267,8 @@ public class ModelClass {
             preparedStmt.setString (2, bookSN);
             preparedStmt.execute();
         }catch(Exception e){
-            System.out.println("Cannot return book, something went wrong "+e);
+            internationalization = r.getString("returnBookError");
+            System.out.println(internationalization + e);
         }
     }
 }

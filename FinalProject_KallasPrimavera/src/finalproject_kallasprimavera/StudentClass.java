@@ -5,21 +5,32 @@
  */
 package finalproject_kallasprimavera;
 
+import java.util.ResourceBundle;
+
 /**
  *
  * @author kalla
  */
-public class StudentClass implements User{
+public class StudentClass implements User{    
+    ResourceBundle r;//resource bundle
+    String internationalization;//string that will hold which key needs to be fetched
+    
     @Override
     public void displayOptions(){
-        String str = "";
-        str += "\n" + "Please select one of the following options: ";
-        str += "\n" + "\t" + "Enter 1 to search a book title by it's title,";
-        str += "\n" + "\t" + "Enter 2 to search a book title by it's author,";
-        str += "\n" + "\t" + "Enter 3 to view the book catalogue,";
-        str += "\n" + "\t" + "Enter 4 to borrow a book,";
-        str += "\n" + "\t" + "Enter 5 to return a book.";
-        str += "\n" + "\t" + "Enter 6 to exit.";
-        System.out.println(str);
+        
+        internationalization = r.getString("studentDisplay1");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay2");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay3");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay4");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay5");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay6");
+        System.out.println(internationalization);
+        internationalization = r.getString("studentDisplay7");
+        System.out.println(internationalization);
     }
 }
