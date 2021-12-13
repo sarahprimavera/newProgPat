@@ -99,29 +99,44 @@ public class ControllerClass {
                 System.out.println(internationalization);
                 String author = userInput.nextLine();
                 
-                System.out.println("Please enter publisher of book");
+                internationalization = r.getString("enterPublisher");
+                System.out.println(internationalization);
                 String publisher = userInput.nextLine();
-                System.out.println("Please enter quantity of "+title);
+                
+                internationalization = r.getString("enterQuantity");
+                System.out.println(internationalization+title);
                 int quantity = numberInput.nextInt();
-                System.out.println("Please enter today's date (YYYY)");
+                
+                internationalization = r.getString("enterTodayDate");
+                System.out.println(internationalization);
                 String date = userInput.nextLine();
                 model.addBook(sn, title, author, publisher, quantity, date);
                 break;
             case 2:
-                System.out.println("Please enter id of this process");
+                internationalization = r.getString("enterProcessId");
+                System.out.println(internationalization);
                 int id = numberInput.nextInt();
-                System.out.println("Please enter sn of the book");
+                
+                internationalization = r.getString("enterSN");
+                System.out.println(internationalization);
                 String sn2 = userInput.nextLine();
-                System.out.println("Please enter student id of student");
+                
+                internationalization = r.getString("enterStudentId");
+                System.out.println(internationalization);
                 int studentId = numberInput.nextInt();
-                System.out.println("Please enter today's date (YYYY)");
+                
+                internationalization = r.getString("enterTodayDate");
+                System.out.println(internationalization);
                 String issueDate = userInput.nextLine();
                 model.issueBook(id, sn2, studentId, issueDate);
                 break;
             case 3:
-                System.out.println("Enter today's date");
+                internationalization = r.getString("enterTodayDate");
+                System.out.println(internationalization);
                 String todayDate = userInput.nextLine();
-                System.out.println("Enter the sn of the book you are returning");
+                
+                internationalization = r.getString("enterSN");
+                System.out.println(internationalization);
                 String sn3 = userInput.nextLine();
                 model.returnBook(todayDate, sn3);
                 break;
@@ -129,7 +144,8 @@ public class ControllerClass {
                 view.issueBooksTable();
                 break;
             case 5:
-                System.out.println("Thank you for using the Library Management System, you may close the program now.");
+                internationalization = r.getString("closeProgram");
+                System.out.println(internationalization);
                 break;
         }
     }
@@ -143,12 +159,14 @@ public class ControllerClass {
         //if user chooses wtv call model method
         switch(option){
             case 1: // search book by title
-                System.out.println("Please enter the title of the book you are looking for: ");
+                internationalization = r.getString("enterTitle");
+                System.out.println(internationalization);
                 String title = userInput.nextLine();
                 model.searchBookByTitle(title);
                 break;
             case 2: // search book by author
-                System.out.println("Please enter the name of the author you are looking for: ");
+                internationalization = r.getString("enterAuthor");
+                System.out.println(internationalization);
                 String author = userInput.nextLine();
                 model.searchBookByAuthor(author);
                 break;
@@ -156,25 +174,36 @@ public class ControllerClass {
                 model.viewBookCatalogue();
                 break;
             case 4: // borrow a book
-                System.out.println("Please enter id of this process: ");
+                internationalization = r.getString("enterProcessId");
+                System.out.println(internationalization);
                 int id = numberInput.nextInt();
-                System.out.println("Please enter sn of the book: ");
+                
+                internationalization = r.getString("enterSN");
+                System.out.println(internationalization);
                 String studentsn = userInput.nextLine();
-                System.out.println("Please enter your student id: ");
+                
+                internationalization = r.getString("enterStudentId");
+                System.out.println(internationalization);
                 int studentId = numberInput.nextInt();
-                System.out.println("Please enter today's date (YYYY): ");
+                
+                internationalization = r.getString("enterTodayDate");
+                System.out.println(internationalization);
                 String issueDate = userInput.nextLine();
                 model.issueBook(id, studentsn, studentId, issueDate);
                 break;
             case 5: // return a book
-                System.out.println("Please enter today's date (YYYY): ");
+                internationalization = r.getString("enterTodayDate");
+                System.out.println(internationalization);
                 String returnDate = userInput.nextLine();
-                System.out.println("Please enter the book's serial number: ");
+                
+                internationalization = r.getString("enterSN");
+                System.out.println(internationalization);
                 String returnsn = userInput.nextLine();
                 model.returnBook(returnDate, returnsn);
                 break;
             case 6:
-                System.out.println("Thank you for using the Library Management System, you may close the program now.");
+                internationalization = r.getString("closeProgram");
+                System.out.println(internationalization);
                 break;
         }
     }    
