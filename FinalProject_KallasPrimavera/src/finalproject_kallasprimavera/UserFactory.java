@@ -10,11 +10,11 @@ package finalproject_kallasprimavera;
  * @author kalla
  */
 public class UserFactory {
-    public static User getUser(String userType){
+    public static User getUser(String userType,String lang){
         if(userType.equalsIgnoreCase("Librarian")){
-            return new LibrarianClass();
+            return new LibrarianClass(lang);
         } else if(userType.equalsIgnoreCase("Student")){
-            return new StudentClass();
+            return new StudentClass(lang);
         } else {
             System.out.println("Invalid response, please type in \"student\" or "
                     + "\"librarian\"");

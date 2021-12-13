@@ -118,11 +118,11 @@ public class ModelClass {
                 preparedStmt.setString (2, sn);
                 preparedStmt.setString (3, String.valueOf(studentId));
                 preparedStmt.setString (4, issueDate);
-                preparedStmt.setString (5, null);//is null because 
+                preparedStmt.setString (5, null);//is null because book just got issued
                 preparedStmt.execute();
             
             //String removeQuantity = "UPDATE Books SET Quantity = -1 WHERE Books.SN = "; 
-            //try to remove quantity of book by 1 since a book gets issues
+            //try to remove quantity of book by 1 since a book gets issued
         } catch(Exception e){
             internationalization = r.getString("addIssuedBookError");
             System.out.println(internationalization + e);

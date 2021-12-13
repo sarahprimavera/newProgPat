@@ -26,17 +26,24 @@ public class ControllerClass {
     
     ResourceBundle r;//resource bundle
     String internationalization;//string that will hold which key needs to be fetched
+    String langInput;
     
     // Create a constructor
     public ControllerClass(ModelClass model, ViewClass view){
         this.model = model;
         this.view = view;
     }
+    public ControllerClass(){
+        
+    }
+    public String getLangInput(){
+        return langInput;
+    }
     public void welcomeMessage(){
         System.out.println("Welcome!/Bienvenue!");
         
         // Initialize variables for Language Input
-        String langInput;
+        
         boolean isLangCorrect = false;
         
         // Ask for language and check if the input is valid
@@ -72,14 +79,14 @@ public class ControllerClass {
             System.out.println(internationalization);
             userType = userInput.nextLine();
             
-            userFactory.getUser(userType);
-        } while(UserFactory.getUser(userType) == null); 
+            userFactory.getUser(userType,langInput);
+        } while(UserFactory.getUser(userType,langInput) == null); 
         
         return userType; //returns what the user finally enters correct user
     }
     //what the librarian will be able to do
     public void librarianControl() throws SQLException{
-        LibrarianClass librarian = new LibrarianClass();
+        LibrarianClass librarian = new LibrarianClass(langInput);
         view.viewOptionsLibrarian(librarian);
         
         int option = numberInput.nextInt();//whatever librarian enters as option will be read here
@@ -151,7 +158,7 @@ public class ControllerClass {
     }
     
     public void studentControl() throws SQLException{
-        StudentClass student = new StudentClass();
+        StudentClass student = new StudentClass(langInput);
         view.viewOptionsStudent(student);
         
         int option = numberInput.nextInt();//whatever student enters as option will be read here
