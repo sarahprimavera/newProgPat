@@ -6,6 +6,8 @@
 package finalproject_kallasprimavera;
 
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
@@ -22,13 +24,42 @@ public class ControllerClass {
     Scanner userInput = new Scanner(System.in);//scanner to read strings
     Scanner numberInput = new Scanner(System.in);//scanner to read ints
     
+    ResourceBundle r;//resource bundle
+    String internationalization;//string that will hold which key needs to be fetched
+    
     // Create a constructor
     public ControllerClass(ModelClass model, ViewClass view){
         this.model = model;
         this.view = view;
     }
-    
-    /* block of code to see if user is librarian or student*/
+    public void welcomeMessage(){
+        System.out.println("Welcome!/Bienvenue!");
+        
+        // Initialize variables for Language Input
+        String langInput;
+        boolean isLangCorrect = false;
+        
+        // Ask for language and check if the input is valid
+        while(isLangCorrect == false){
+            System.out.println("What language would you like to use today? Please type in en or fr: ");
+            System.out.println("Quelle langue aimeriez-vous utiliser aujourd'hui? Entrez en ou fr: ");
+            langInput = userInput.nextLine();
+            if (langInput.equalsIgnoreCase("en")){
+                Locale locale = new Locale("en","CA");
+                r = ResourceBundle.getBundle("FinalProject_KallasPrimavera/Bundle",locale);
+                isLangCorrect = true;
+            }else if (langInput.equalsIgnoreCase("fr")){
+                Locale locale = new Locale("fr","CA");
+                r = ResourceBundle.getBundle("FinalProject_KallasPrimavera/Bundle_fr_CA",locale);
+                isLangCorrect = true;
+            }else {
+                System.out.println("Sorry, that was not a correct entry.");
+                System.out.println("Désolé, ce n'était pas une entrée valide.");
+            }
+        }
+    }
+ 
+    //method to see if user is student or librarian
     public String getUserType(){
         
         // Initialize variables for role input
@@ -37,7 +68,8 @@ public class ControllerClass {
         
         // Ask for user role and ensure the input is valid
         do{
-            System.out.println("What type of user are you? Librarian or Student: ");
+            internationalization = r.getString("whichUser");
+            System.out.println(internationalization);
             userType = userInput.nextLine();
             
             userFactory.getUser(userType);
@@ -55,12 +87,18 @@ public class ControllerClass {
         //depending on what librarian chooses, different methods from model will be executed
         switch(option){
             case 1:
-                System.out.println("Please enter SN of book");
+                internationalization = r.getString("enterSN");
+                System.out.println(internationalization);
                 String sn = userInput.nextLine();
-                System.out.println("Please enter title of book");
+                
+                internationalization = r.getString("enterTitle");
+                System.out.println(internationalization);
                 String title = userInput.nextLine();
-                System.out.println("Please enter author of book");
+                
+                internationalization = r.getString("enterAuthor");
+                System.out.println(internationalization);
                 String author = userInput.nextLine();
+                
                 System.out.println("Please enter publisher of book");
                 String publisher = userInput.nextLine();
                 System.out.println("Please enter quantity of "+title);
